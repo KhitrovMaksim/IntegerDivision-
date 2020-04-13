@@ -4,15 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class IntegerDivisionTest {
-    
+class IntegerDivisionTest {
+
     IntegerDivision integerDivision = new IntegerDivision();
-    
+
     @Test
-    public void integerDivision_ThrowsException_IfInputNumbersIsZero() {
+    void integerDivision_ThrowsException_IfDivisorsIsZero() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            integerDivision.console(0, 0);
+            integerDivision.calculateValues(0, 0);
         });
     }
 }

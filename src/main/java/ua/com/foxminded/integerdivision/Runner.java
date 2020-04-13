@@ -5,11 +5,8 @@ public class Runner {
     public static void main(String[] args) {
         int dividend = 78945;
         int divisor = 4;
-        
-        IntegerDivision integerDivision = new IntegerDivision();
+        View view = new View();
 
-        integerDivision.console(dividend, divisor);
-
+        view.consoleOutput(dividend, divisor);
     }
-
 }
