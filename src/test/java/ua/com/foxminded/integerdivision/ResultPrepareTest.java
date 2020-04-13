@@ -12,7 +12,7 @@ public class ResultPrepareTest {
     IntegerDivision result = new IntegerDivision();
 
     @Test
-    void ResultPrepare_ShouldReturnCertainStrings_IfSetsTheSameVariables() {
+    void ResultPrepare_ShouldReturnCertainStrings_IfSetsTheSamePositiveVariables() {
         ArrayList<String> output = new ArrayList<>();
         output.add("_4|2");
         output.add(" 4|-");
@@ -20,5 +20,16 @@ public class ResultPrepareTest {
         output.add(" 0");
 
         assertEquals(output, strings.composeStrings(result.calculateValues(4, 2), 4, 2));
+    }
+    
+    @Test
+    void ResultPrepare_ShouldReturnCertainStrings_IfSetsTheNegativeVariables() {
+        ArrayList<String> output = new ArrayList<>();
+        output.add("_4|2");
+        output.add(" 4|-");
+        output.add(" -|2");
+        output.add(" 0");
+
+        assertEquals(output, strings.composeStrings(result.calculateValues(-4, -2), 4, 2));
     }
 }
