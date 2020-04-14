@@ -121,7 +121,7 @@ public class IntegerDivision {
         int remainder = dividend % divisor;
 
         if (inputIterator == input.size()) {
-            indentation = indentation.substring(1, indentation.length());
+            indentation = indentation.substring(1);
             prepareStrings.add(indentation + remainder);
         } else {
 
@@ -149,7 +149,7 @@ public class IntegerDivision {
             boolean equals = lastString.equals(delimiterWithIndent);
 
             if (!equals) {
-                indentation = indentation.substring(1, indentation.length());
+                indentation = indentation.substring(1);
             }
             prepareStrings.add(indentation + remainder);
 
