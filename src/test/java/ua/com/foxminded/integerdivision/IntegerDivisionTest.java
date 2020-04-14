@@ -18,7 +18,7 @@ class IntegerDivisionTest {
     }
     
     @Test
-    void ResultPrepare_ShouldReturnCertainString_IfSetsTheSamePositiveVariables() {
+    void integerDivision_ShouldReturnCertainString_IfDivisorIsOne() {
         String expected =
                 "_999|1\n" +
                 " 9  |---\n" +
@@ -35,7 +35,7 @@ class IntegerDivisionTest {
     }
     
     @Test
-    void ResultPrepare_ShouldReturnCertainString_IfSetsTheNegativeVariables() {
+    void integerDivision_ShouldReturnCertainString_IfDivisorAndDividendAreNegativeNumbers() {
         String expected =
                 "_4|2\n" +
                 " 4|-\n" +
@@ -46,7 +46,7 @@ class IntegerDivisionTest {
     }
     
     @Test
-    void ResultPrepare_ShouldReturnCertainString_IfInResultTwoDashesDelimiter() {
+    void integerDivision_ShouldReturnCertainString_IfDivisorIsEight() {
         String expected =
                 "_512|8\n" +
                 " 48 |--\n" +
