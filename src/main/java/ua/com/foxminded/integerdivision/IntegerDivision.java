@@ -7,6 +7,7 @@ public class IntegerDivision {
     private static String verticalBar = "|";
     private static String indent = " ";
     private static String delimiter = "-";
+    private static String lineEnd = "\n";
 
     public String divideInColumn(int dividend, int divisor) {
         dividend = Math.abs(dividend);
@@ -51,35 +52,26 @@ public class IntegerDivision {
     private String composeDivisionResult(ArrayList<String> input, int dividend, int divisor) {
 
         int answer = dividend / divisor;
-        ArrayList<String> output = new ArrayList<>();
+        StringBuilder output = new StringBuilder("");
 
-        output.addAll(composeFirstString(dividend, divisor));
-        output.addAll(composeSecondString(Integer.parseInt(input.get(1)), dividend, answer));
-        output.addAll(composeThirdString(Integer.parseInt(input.get(1)), dividend, answer));
-        output.addAll(composeRemainingStrings(input, dividend, divisor));
-        StringBuilder result = new StringBuilder("");
+        output.append(composeFirstString(dividend, divisor));
+        output.append(composeSecondString(Integer.parseInt(input.get(1)), dividend, answer));
+        output.append(composeThirdString(Integer.parseInt(input.get(1)), dividend, answer));
+        output.append(composeRemainingStrings(input, dividend, divisor));
 
-        for (int i = 0; i < output.size(); i++) {
-            if (i == output.size() - 1) {
-                result.append(output.get(i));
-            } else {
-                result.append(output.get(i) + "\n");
-            }
-        }
-
-        return result.toString();
+        return output.toString();
     }
 
-    private ArrayList<String> composeFirstString(int dividend, int divisor) {
-        ArrayList<String> firstString = new ArrayList<>();
+    private String composeFirstString(int dividend, int divisor) {
+        String firstString = "";
 
-        firstString.add(String.format("%1$s%2$s%3$s%4$s", minusSign, dividend, verticalBar, divisor));
+        firstString = String.format("%1$s%2$s%3$s%4$s%5$s", minusSign, dividend, verticalBar, divisor, lineEnd);
 
         return firstString;
     }
 
-    private ArrayList<String> composeSecondString(int subtrahend, int dividend, int answer) {
-        ArrayList<String> secondString = new ArrayList<>();
+    private String composeSecondString(int subtrahend, int dividend, int answer) {
+        String secondString = "";
         StringBuilder stringPrepare = new StringBuilder(indent + subtrahend);
         int lengthOfSpaces = Integer.toString(dividend).length() - Integer.toString(subtrahend).length();
         int lengthOfDashes = Integer.toString(answer).length();
@@ -94,13 +86,13 @@ public class IntegerDivision {
             stringPrepare.append(delimiter);
         }
 
-        secondString.add(stringPrepare.toString());
+        secondString = String.format("%1$s%2$s", stringPrepare.toString(), lineEnd);
 
         return secondString;
     }
 
-    private ArrayList<String> composeThirdString(int subtrahend, int dividend, int answer) {
-        ArrayList<String> thirdString = new ArrayList<>();
+    private String composeThirdString(int subtrahend, int dividend, int answer) {
+        String thirdString = "";
         StringBuilder stringPrepare = new StringBuilder(indent);
         int lengthOfDashes = Integer.toString(subtrahend).length();
         int lengthOfSpaces = Integer.toString(dividend).length() - Integer.toString(subtrahend).length();
@@ -113,13 +105,14 @@ public class IntegerDivision {
             stringPrepare.append(indent);
         }
 
-        thirdString.add(stringPrepare.append(verticalBar + answer).toString());
+        thirdString = String.format("%1$s%2$s%3$s%4$s", stringPrepare.toString(), verticalBar, answer, lineEnd);
 
         return thirdString;
     }
 
-    private ArrayList<String> composeRemainingStrings(ArrayList<String> input, int dividend, int divisor) {
-        ArrayList<String> remainingStrings = new ArrayList<>();
+    private String composeRemainingStrings(ArrayList<String> input, int dividend, int divisor) {
+        ArrayList<String> prepareStrings = new ArrayList<>();
+        StringBuilder remainingStrings = new StringBuilder("");
 
         int inputIterator = 2;
         int numberOfLines = input.size();
@@ -129,41 +122,53 @@ public class IntegerDivision {
 
         if (inputIterator == input.size()) {
             indentation = indentation.substring(1, indentation.length());
-            remainingStrings.add(indentation + remainder);
+            prepareStrings.add(indentation + remainder);
         } else {
 
             for (int i = 0; i <= ((numberOfLines - 3) / 2); i++) {
 
                 if (inputIterator == (numberOfLines - 1)) {
-                    remainingStrings.add(indentation + input.get(inputIterator));
+                    prepareStrings.add(indentation + input.get(inputIterator));
                     break;
                 } else {
-                    remainingStrings.add(minusSignWithIndent + input.get(inputIterator));
+                    prepareStrings.add(minusSignWithIndent + input.get(inputIterator));
                     inputIterator++;
                 }
 
-                remainingStrings.add(indentation + input.get(inputIterator));
-                remainingStrings.addAll(delimeterWithIndentation(indentation, input.get(inputIterator).length()));
+                prepareStrings.add(indentation + input.get(inputIterator));
+                prepareStrings.addAll(delimeterWithIndentation(indentation, input.get(inputIterator).length()));
 
                 indentation += indent;
                 minusSignWithIndent = indent + minusSignWithIndent;
                 inputIterator++;
             }
 
-            String lastString = remainingStrings.get(remainingStrings.size() - 1);
+            String lastString = prepareStrings.get(prepareStrings.size() - 1);
             lastString = lastString.trim();
             String delimiterWithIndent = delimiter + delimiter;
             boolean equals = lastString.equals(delimiterWithIndent);
 
             if (equals) {
-                remainingStrings.add(indentation + remainder);
+                prepareStrings.add(indentation + remainder);
             } else {
                 indentation = indentation.substring(1, indentation.length());
-                remainingStrings.add(indentation + remainder);
+                prepareStrings.add(indentation + remainder);
+            }
+        }
+        
+
+        int prepareStringsSize = prepareStrings.size();
+        
+        
+        for (int i = 0; i < prepareStringsSize; i++) {
+            if (i == prepareStringsSize - 1) {
+                remainingStrings.append(prepareStrings.get(i));
+            } else {
+                remainingStrings.append(prepareStrings.get(i) + lineEnd);
             }
         }
 
-        return remainingStrings;
+        return remainingStrings.toString();
     }
 
     private String lenghtOfFirstIndent(ArrayList<String> calculatedValues) {
