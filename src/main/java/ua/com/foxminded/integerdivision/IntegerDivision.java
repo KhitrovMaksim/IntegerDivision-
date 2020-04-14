@@ -6,8 +6,8 @@ public class IntegerDivision {
 
     private ArrayList<String> calculateValues(int dividend, int divisor) {
 
-        if (divisor == 0) {
-            throw new IllegalArgumentException("Divisor cannot be 0.");
+        if ((divisor == 0) || (divisor > dividend)) {
+            throw new IllegalArgumentException("Divisor cannot be 0 or bigger than dividend.");
         }
 
         dividend = Math.abs(dividend);

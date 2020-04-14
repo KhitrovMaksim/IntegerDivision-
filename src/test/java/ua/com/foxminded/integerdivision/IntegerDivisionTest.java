@@ -10,10 +10,26 @@ class IntegerDivisionTest {
     IntegerDivision integerDivision = new IntegerDivision();
 
     @Test
-    void integerDivision_ThrowsException_IfDivisorsIsZero() {
+    void integerDivision_ThrowsException_IfDivisorIsZero() {
 
         assertThrows(IllegalArgumentException.class, () -> {
             integerDivision.divideInColumn(0, 0);
+        });
+    }
+    
+    @Test
+    void integerDivision_ThrowsException_IfDividendIsZero() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            integerDivision.divideInColumn(0, 1);
+        });
+    }
+    
+    @Test
+    void integerDivision_ThrowsException_IfDivisorBiggerThanDividend() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            integerDivision.divideInColumn(1, 8);
         });
     }
     
@@ -59,4 +75,23 @@ class IntegerDivisionTest {
         assertEquals(expected, integerDivision.divideInColumn(512, 8));
     }
 
+    @Test
+    void integerDivision_ShouldReturnCertainString_IfDividendHasTwoZeroInside() {
+        String expected =
+                "_1001|1\n" +
+                " 1   |----\n" +
+                " -   |1001\n" +
+                " _0\n" +
+                "  0\n" +
+                "  -\n" +
+                "  _0\n" +
+                "   0\n" +
+                "   -\n" +
+                "   _1\n" +
+                "    1\n" +
+                "    -\n" +
+                "    0";
+
+        assertEquals(expected, integerDivision.divideInColumn(1001, 1));
+    }
 }
