@@ -113,34 +113,28 @@ public class IntegerDivision {
     private String composeDivisionSteps(ArrayList<String> input, int dividend, int divisor) {
         ArrayList<String> prepareStrings = new ArrayList<>();
         StringBuilder remainingStrings = new StringBuilder("");
-
-        int inputIterator = 2;
-        int numberOfLines = input.size();
         String indentation = lenghtOfFirstIndent(input) + indent;
         String minusSignWithIndent = lenghtOfFirstIndent(input) + minusSign;
-        int remainder = dividend % divisor;
 
-        if (inputIterator == input.size()) {
+        input.remove(0);
+        input.remove(0);
+
+        int numberOfLines = input.size();
+        int remainder = dividend % divisor;
+        int iterator = 0;
+
+        if (numberOfLines == 0) {
             indentation = indentation.substring(1);
             prepareStrings.add(indentation + remainder);
         } else {
+            for (int i = 0; i < numberOfLines / 2; i++) {
 
-            for (int i = 0; i <= ((numberOfLines - 3) / 2); i++) {
-
-                if (inputIterator == (numberOfLines - 1)) {
-                    prepareStrings.add(indentation + input.get(inputIterator));
-                    break;
-                } else {
-                    prepareStrings.add(minusSignWithIndent + input.get(inputIterator));
-                    inputIterator++;
-                }
-
-                prepareStrings.add(indentation + input.get(inputIterator));
-                prepareStrings.addAll(delimeterWithIndentation(indentation, input.get(inputIterator).length()));
-
+                prepareStrings.add(minusSignWithIndent + input.get(i + iterator));
+                prepareStrings.add(indentation + input.get(i + iterator));
+                prepareStrings.addAll(delimeterWithIndentation(indentation, input.get(i).length()));
                 indentation += indent;
                 minusSignWithIndent = indent + minusSignWithIndent;
-                inputIterator++;
+                iterator++;
             }
 
             String lastString = prepareStrings.get(prepareStrings.size() - 1);
