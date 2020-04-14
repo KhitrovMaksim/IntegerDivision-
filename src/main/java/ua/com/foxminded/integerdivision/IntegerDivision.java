@@ -18,8 +18,6 @@ public class IntegerDivision {
             throw new IllegalArgumentException("Divisor cannot be 0 or bigger than dividend.");
         }
 
-        dividend = Math.abs(dividend);
-        divisor = Math.abs(divisor);
         ArrayList<String> calculatedSteps = new ArrayList<>();
         char[] digitsDividend = Integer.toString(dividend).toCharArray();
         int amountNumbersToDivide = digitsDividend.length - 1;
