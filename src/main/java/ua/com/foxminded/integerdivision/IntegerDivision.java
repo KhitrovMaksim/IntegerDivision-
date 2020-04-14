@@ -57,7 +57,7 @@ public class IntegerDivision {
         output.append(composeFirstString(dividend, divisor));
         output.append(composeSecondString(Integer.parseInt(input.get(1)), dividend, answer));
         output.append(composeThirdString(Integer.parseInt(input.get(1)), dividend, answer));
-        output.append(composeRemainingStrings(input, dividend, divisor));
+        output.append(composeDivisionSteps(input, dividend, divisor));
 
         return output.toString();
     }
@@ -110,7 +110,7 @@ public class IntegerDivision {
         return thirdString;
     }
 
-    private String composeRemainingStrings(ArrayList<String> input, int dividend, int divisor) {
+    private String composeDivisionSteps(ArrayList<String> input, int dividend, int divisor) {
         ArrayList<String> prepareStrings = new ArrayList<>();
         StringBuilder remainingStrings = new StringBuilder("");
 
@@ -155,11 +155,9 @@ public class IntegerDivision {
                 prepareStrings.add(indentation + remainder);
             }
         }
-        
 
         int prepareStringsSize = prepareStrings.size();
-        
-        
+
         for (int i = 0; i < prepareStringsSize; i++) {
             if (i == prepareStringsSize - 1) {
                 remainingStrings.append(prepareStrings.get(i));
