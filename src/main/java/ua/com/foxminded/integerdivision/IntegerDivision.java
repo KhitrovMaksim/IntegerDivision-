@@ -184,13 +184,13 @@ public class IntegerDivision {
 
     private ArrayList<String> delimeterWithIndentation(String indentation, int delimeterLenght) {
         ArrayList<String> delimeterWithIndentation = new ArrayList<>();
-        String delimiterWithIndent = indentation;
+        StringBuilder delimiterWithIndent = new StringBuilder(indentation);
 
         for (int i = 0; i < delimeterLenght; i++) {
-            delimiterWithIndent += delimiter;
+            delimiterWithIndent.append(delimiter);
         }
 
-        delimeterWithIndentation.add(delimiterWithIndent);
+        delimeterWithIndentation.add(delimiterWithIndent.toString());
 
         return delimeterWithIndentation;
     }
