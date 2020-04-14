@@ -7,12 +7,12 @@ public class IntegerDivision {
     public String divideInColumn(int dividend, int divisor) {
         dividend = Math.abs(dividend);
         divisor = Math.abs(divisor);
-        ArrayList<String> input = calculateValues(dividend, divisor);
+        ArrayList<String> input = calculateDivisionSteps(dividend, divisor);
 
         return composeDivisionResult(input, dividend, divisor);
     }
 
-    private ArrayList<String> calculateValues(int dividend, int divisor) {
+    private ArrayList<String> calculateDivisionSteps(int dividend, int divisor) {
 
         if ((divisor == 0) || (divisor > dividend)) {
             throw new IllegalArgumentException("Divisor cannot be 0 or bigger than dividend.");
@@ -20,7 +20,7 @@ public class IntegerDivision {
 
         dividend = Math.abs(dividend);
         divisor = Math.abs(divisor);
-        ArrayList<String> calculatedValues = new ArrayList<>();
+        ArrayList<String> calculatedSteps = new ArrayList<>();
         char[] digitsDividend = Integer.toString(dividend).toCharArray();
         int amountNumbersToDivide = digitsDividend.length - 1;
         int number = Character.getNumericValue(digitsDividend[0]);
@@ -35,15 +35,15 @@ public class IntegerDivision {
                 ++numberIndex;
             }
 
-            calculatedValues.add(Integer.toString(number));
+            calculatedSteps.add(Integer.toString(number));
             remainder = number % divisor;
             difference = number - remainder;
-            calculatedValues.add(Integer.toString(difference));
+            calculatedSteps.add(Integer.toString(difference));
             number = remainder;
 
         } while (amountNumbersToDivide >= numberIndex);
 
-        return calculatedValues;
+        return calculatedSteps;
     }
 
     private String composeDivisionResult(ArrayList<String> input, int dividend, int divisor) {
