@@ -7,7 +7,6 @@ public class IntegerDivision {
     private static String verticalBar = "|";
     private static String indent = " ";
     private static String delimiter = "-";
-    
 
     public String divideInColumn(int dividend, int divisor) {
         dividend = Math.abs(dividend);
@@ -74,7 +73,7 @@ public class IntegerDivision {
     private ArrayList<String> composeFirstString(int dividend, int divisor) {
         ArrayList<String> firstString = new ArrayList<>();
 
-        firstString.add(minusSign + Integer.toString(dividend) + verticalBar + Integer.toString(divisor));
+        firstString.add(String.format("%1$s%2$s%3$s%4$s", minusSign, dividend, verticalBar, divisor));
 
         return firstString;
     }
