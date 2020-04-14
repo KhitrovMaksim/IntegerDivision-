@@ -148,12 +148,11 @@ public class IntegerDivision {
             String delimiterWithIndent = delimiter + delimiter;
             boolean equals = lastString.equals(delimiterWithIndent);
 
-            if (equals) {
-                prepareStrings.add(indentation + remainder);
-            } else {
+            if (!equals) {
                 indentation = indentation.substring(1, indentation.length());
-                prepareStrings.add(indentation + remainder);
             }
+            prepareStrings.add(indentation + remainder);
+
         }
 
         int prepareStringsSize = prepareStrings.size();
