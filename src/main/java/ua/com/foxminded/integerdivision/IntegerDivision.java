@@ -161,7 +161,7 @@ public class IntegerDivision {
             if (i == prepareStringsSize - 1) {
                 remainingStrings.append(prepareStrings.get(i));
             } else {
-                remainingStrings.append(prepareStrings.get(i) + lineEnd);
+                remainingStrings.append(prepareStrings.get(i)).append(lineEnd);
             }
         }
 
