@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 public class IntegerDivision {
 
+    public String divideInColumn(int dividend, int divisor) {
+        dividend = Math.abs(dividend);
+        divisor = Math.abs(divisor);
+        ArrayList<String> input = calculateValues(dividend, divisor);
+
+        return composeDivisionResult(input, dividend, divisor);
+    }
+
     private ArrayList<String> calculateValues(int dividend, int divisor) {
 
         if ((divisor == 0) || (divisor > dividend)) {
@@ -36,6 +44,28 @@ public class IntegerDivision {
         } while (amountNumbersToDivide >= numberIndex);
 
         return calculatedValues;
+    }
+
+    private String composeDivisionResult(ArrayList<String> input, int dividend, int divisor) {
+
+        int answer = dividend / divisor;
+        ArrayList<String> output = new ArrayList<>();
+
+        output.addAll(composeFirstString(dividend, divisor));
+        output.addAll(composeSecondString(Integer.parseInt(input.get(1)), dividend, answer));
+        output.addAll(composeThirdString(Integer.parseInt(input.get(1)), dividend, answer));
+        output.addAll(composeRemainingStrings(input, dividend, divisor));
+        StringBuilder result = new StringBuilder("");
+
+        for (int i = 0; i < output.size(); i++) {
+            if (i == output.size() - 1) {
+                result.append(output.get(i));
+            } else {
+                result.append(output.get(i) + "\n");
+            }
+        }
+
+        return result.toString();
     }
 
     private ArrayList<String> composeFirstString(int dividend, int divisor) {
@@ -86,34 +116,6 @@ public class IntegerDivision {
         return thirdString;
     }
 
-    private ArrayList<String> delimeterWithIndentation(String indentation, int delimeterLenght) {
-        ArrayList<String> delimeterWithIndentation = new ArrayList<>();
-        String delimiter = indentation;
-
-        for (int i = 0; i < delimeterLenght; i++) {
-            delimiter += "-";
-        }
-
-        delimeterWithIndentation.add(delimiter);
-
-        return delimeterWithIndentation;
-    }
-
-    private String lenghtOfFirstIndent(ArrayList<String> calculatedValues) {
-        String indentation;
-        int lengthOfFirstNumber = calculatedValues.get(0).length();
-        int difference = Integer.parseInt(calculatedValues.get(0)) - Integer.parseInt(calculatedValues.get(1));
-
-        if (lengthOfFirstNumber > Integer.toString(difference).length() || difference == 0) {
-            indentation = " ";
-        } else {
-            indentation = "";
-        }
-
-        return indentation;
-
-    }
-
     private ArrayList<String> composeRemainingStrings(ArrayList<String> input, int dividend, int divisor) {
         ArrayList<String> remainingStrings = new ArrayList<>();
 
@@ -162,33 +164,30 @@ public class IntegerDivision {
         return remainingStrings;
     }
 
-    private String composeDivisionResult(ArrayList<String> input, int dividend, int divisor) {
+    private String lenghtOfFirstIndent(ArrayList<String> calculatedValues) {
+        String indentation;
+        int lengthOfFirstNumber = calculatedValues.get(0).length();
+        int difference = Integer.parseInt(calculatedValues.get(0)) - Integer.parseInt(calculatedValues.get(1));
 
-        int answer = dividend / divisor;
-        ArrayList<String> output = new ArrayList<>();
-
-        output.addAll(composeFirstString(dividend, divisor));
-        output.addAll(composeSecondString(Integer.parseInt(input.get(1)), dividend, answer));
-        output.addAll(composeThirdString(Integer.parseInt(input.get(1)), dividend, answer));
-        output.addAll(composeRemainingStrings(input, dividend, divisor));
-        StringBuilder result = new StringBuilder("");
-
-        for (int i = 0; i < output.size(); i++) {
-            if (i == output.size() - 1) {
-                result.append(output.get(i));
-            } else {
-                result.append(output.get(i) + "\n");
-            }
+        if (lengthOfFirstNumber > Integer.toString(difference).length() || difference == 0) {
+            indentation = " ";
+        } else {
+            indentation = "";
         }
 
-        return result.toString();
+        return indentation;
     }
 
-    public String divideInColumn(int dividend, int divisor) {
-        dividend = Math.abs(dividend);
-        divisor = Math.abs(divisor);
-        ArrayList<String> input = calculateValues(dividend, divisor);
+    private ArrayList<String> delimeterWithIndentation(String indentation, int delimeterLenght) {
+        ArrayList<String> delimeterWithIndentation = new ArrayList<>();
+        String delimiter = indentation;
 
-        return composeDivisionResult(input, dividend, divisor);
+        for (int i = 0; i < delimeterLenght; i++) {
+            delimiter += "-";
+        }
+
+        delimeterWithIndentation.add(delimiter);
+
+        return delimeterWithIndentation;
     }
 }
