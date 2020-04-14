@@ -162,7 +162,7 @@ public class IntegerDivision {
         return remainingStrings;
     }
 
-    private ArrayList<String> composeStrings(ArrayList<String> input, int dividend, int divisor) {
+    private String composeDivisionResult(ArrayList<String> input, int dividend, int divisor) {
 
         int answer = dividend / divisor;
         ArrayList<String> output = new ArrayList<>();
@@ -171,16 +171,7 @@ public class IntegerDivision {
         output.addAll(composeSecondString(Integer.parseInt(input.get(1)), dividend, answer));
         output.addAll(composeThirdString(Integer.parseInt(input.get(1)), dividend, answer));
         output.addAll(composeRemainingStrings(input, dividend, divisor));
-
-        return output;
-    }
-
-    public String divideInColumn(int dividend, int divisor) {
-        dividend = Math.abs(dividend);
-        divisor = Math.abs(divisor);
         StringBuilder result = new StringBuilder("");
-        ArrayList<String> input = calculateValues(dividend, divisor);
-        ArrayList<String> output = composeStrings(input, dividend, divisor);
 
         for (int i = 0; i < output.size(); i++) {
             if (i == output.size() - 1) {
@@ -191,5 +182,13 @@ public class IntegerDivision {
         }
 
         return result.toString();
+    }
+
+    public String divideInColumn(int dividend, int divisor) {
+        dividend = Math.abs(dividend);
+        divisor = Math.abs(divisor);
+        ArrayList<String> input = calculateValues(dividend, divisor);
+
+        return composeDivisionResult(input, dividend, divisor);
     }
 }
