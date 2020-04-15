@@ -34,6 +34,12 @@ public class IntegerDivision {
 
         do {
 
+            if (dividend == divisor) {
+                calculatedSteps.add(Integer.toString(dividend));
+                calculatedSteps.add(Integer.toString(divisor));
+                break;
+            }
+
             if (number < divisor) {
                 number = number * 10 + Character.getNumericValue(digitsDividend[numberIndex]);
                 ++numberIndex;
@@ -56,7 +62,7 @@ public class IntegerDivision {
         StringBuilder output = new StringBuilder("");
 
         output.append(composeFirstString(dividend, divisor));
-        output.append(composeSecondString(Integer.parseInt(divisionSteps.get(1)), dividend, answer));
+        output.append(composeSecondString(Integer.parseInt(divisionSteps.get(1)), dividend, divisor, answer));
         output.append(composeThirdString(Integer.parseInt(divisionSteps.get(1)), dividend, answer));
         output.append(composeDivisionSteps(divisionSteps, dividend, divisor));
 
@@ -68,10 +74,13 @@ public class IntegerDivision {
         return String.format("%1$s%2$s%3$s%4$s%5$s", UNDERSCORE, dividend, VERTICAL_BAR, divisor, LINE_END);
     }
 
-    private String composeSecondString(int subtrahend, int dividend, int answer) {
+    private String composeSecondString(int subtrahend, int dividend, int divisor, int answer) {
         StringBuilder stringPrepare = new StringBuilder(INDENT + subtrahend);
         int lengthOfSpaces = Integer.toString(dividend).length() - Integer.toString(subtrahend).length();
         int lengthOfDashes = Integer.toString(answer).length();
+        if (Integer.toString(divisor).length() > Integer.toString(answer).length()) {
+            lengthOfDashes = Integer.toString(divisor).length();
+        }
 
         for (int i = 0; i < lengthOfSpaces; i++) {
             stringPrepare.append(INDENT);
@@ -105,8 +114,8 @@ public class IntegerDivision {
     private String composeDivisionSteps(List<String> divisionSteps, int dividend, int divisor) {
         List<String> prepareStrings = new ArrayList<>();
         StringBuilder result = new StringBuilder("");
-        String indentation = lenghtOfFirstIndent(divisionSteps) + INDENT;
-        String minusSignWithIndent = lenghtOfFirstIndent(divisionSteps) + UNDERSCORE;
+        String indentation = lengthOfFirstIndent(divisionSteps) + INDENT;
+        String minusSignWithIndent = lengthOfFirstIndent(divisionSteps) + UNDERSCORE;
 
         divisionSteps.remove(0);
         divisionSteps.remove(0);
@@ -117,26 +126,32 @@ public class IntegerDivision {
 
         if (numberOfLines == 0) {
             indentation = indentation.substring(1);
+
+            if (dividend == divisor) {
+                for (int i = 0; i < Integer.toString(divisor).length() - 1; i++) {
+                    indentation += INDENT;
+                }
+            }
+
             prepareStrings.add(indentation + remainder);
+
         } else {
+
             for (int i = 0; i < numberOfLines / 2; i++) {
 
                 prepareStrings.add(minusSignWithIndent + divisionSteps.get(i + iterator));
+                iterator++;
                 prepareStrings.add(indentation + divisionSteps.get(i + iterator));
                 prepareStrings.addAll(delimeterWithIndentation(indentation, divisionSteps.get(i).length()));
                 indentation += INDENT;
                 minusSignWithIndent = INDENT + minusSignWithIndent;
-                iterator++;
+
             }
 
             String lastString = prepareStrings.get(prepareStrings.size() - 1);
-            lastString = lastString.trim();
-            String delimiterWithIndent = DASH + DASH;
-            boolean equals = lastString.equals(delimiterWithIndent);
-
-            if (!equals) {
-                indentation = indentation.substring(1);
-            }
+            int lastStringLenght = lastString.length();
+            int remainderLenght = Integer.toString(remainder).length();
+            indentation = indentation(lastStringLenght - remainderLenght);
             prepareStrings.add(indentation + remainder);
 
         }
@@ -150,11 +165,19 @@ public class IntegerDivision {
                 result.append(prepareStrings.get(i)).append(LINE_END);
             }
         }
-
         return result.toString();
     }
 
-    private String lenghtOfFirstIndent(List<String> calculatedValues) {
+    private String indentation(int indentationLength) {
+        StringBuilder indentation = new StringBuilder("");
+        for (int i = 0; i < indentationLength; i++) {
+            indentation.append(INDENT);
+        }
+
+        return indentation.toString();
+    }
+
+    private String lengthOfFirstIndent(List<String> calculatedValues) {
         String indentation = "";
         int lengthOfFirstNumber = calculatedValues.get(0).length();
         int difference = Integer.parseInt(calculatedValues.get(0)) - Integer.parseInt(calculatedValues.get(1));

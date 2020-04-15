@@ -94,4 +94,35 @@ class IntegerDivisionTest {
 
         assertEquals(expected, integerDivision.divideInColumn(1001, 1));
     }
+    
+    @Test
+    void integerDivision_ShouldReturnCertainString_IfDivisorAndDividendAreEquals() {
+        String expected =
+                "_100|100\n" +
+                " 100|---\n" +
+                " ---|1\n" +
+                "   0";
+
+        assertEquals(expected, integerDivision.divideInColumn(100, 100));
+    }
+    
+    @Test
+    void integerDivision_ShouldReturnCertainString_IfDividendIsNegative() {
+        String expected =
+                "_75451|53\n" +
+                " 53   |----\n" +
+                " --   |1423\n" +
+                "_224\n" +
+                " 212\n" +
+                " ---\n" +
+                " _125\n" +
+                "  106\n" +
+                "  ---\n" +
+                "  _191\n" +
+                "   159\n" +
+                "   ---\n" +
+                "    32";
+
+        assertEquals(expected, integerDivision.divideInColumn(-75451, 53));
+    }
 }
