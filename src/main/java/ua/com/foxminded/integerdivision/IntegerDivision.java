@@ -104,7 +104,7 @@ public class IntegerDivision {
 
     private String composeDivisionSteps(List<String> divisionSteps, int dividend, int divisor) {
         List<String> prepareStrings = new ArrayList<>();
-        StringBuilder remainingStrings = new StringBuilder("");
+        StringBuilder result = new StringBuilder("");
         String indentation = lenghtOfFirstIndent(divisionSteps) + INDENT;
         String minusSignWithIndent = lenghtOfFirstIndent(divisionSteps) + UNDERSCORE;
 
@@ -145,13 +145,13 @@ public class IntegerDivision {
 
         for (int i = 0; i < prepareStringsSize; i++) {
             if (i == prepareStringsSize - 1) {
-                remainingStrings.append(prepareStrings.get(i));
+                result.append(prepareStrings.get(i));
             } else {
-                remainingStrings.append(prepareStrings.get(i)).append(LINE_END);
+                result.append(prepareStrings.get(i)).append(LINE_END);
             }
         }
 
-        return remainingStrings.toString();
+        return result.toString();
     }
 
     private String lenghtOfFirstIndent(List<String> calculatedValues) {
