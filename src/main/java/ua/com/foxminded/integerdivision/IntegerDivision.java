@@ -114,8 +114,9 @@ public class IntegerDivision {
     private String composeDivisionSteps(List<String> divisionSteps, int dividend, int divisor) {
         List<String> prepareStrings = new ArrayList<>();
         StringBuilder result = new StringBuilder("");
-        String indentation = calculatesFirstIndent(divisionSteps) + INDENT;
-        String minusSignWithIndent = calculatesFirstIndent(divisionSteps) + UNDERSCORE;
+        String firstIndent = calculatesFirstIndent(divisionSteps);
+        String indentation = firstIndent + INDENT;
+        String minusSignWithIndent = firstIndent + UNDERSCORE;
 
         divisionSteps.remove(0);
         divisionSteps.remove(0);
