@@ -3,11 +3,11 @@ package ua.com.foxminded.integerdivision;
 import java.util.ArrayList;
 
 public class IntegerDivision {
-    private static String minusSign = "_";
-    private static String verticalBar = "|";
-    private static String indent = " ";
-    private static String delimiter = "-";
-    private static String lineEnd = "\n";
+    private static String UNDERSCORE = "_";
+    private static String VERTICAL_BAR = "|";
+    private static String INDENT = " ";
+    private static String DASH = "-";
+    private static String LINE_END = "\n";
 
     public String divideInColumn(int dividend, int divisor) {
         dividend = Math.abs(dividend);
@@ -65,47 +65,47 @@ public class IntegerDivision {
     private String composeFirstString(int dividend, int divisor) {
         String firstString = "";
 
-        firstString = String.format("%1$s%2$s%3$s%4$s%5$s", minusSign, dividend, verticalBar, divisor, lineEnd);
+        firstString = String.format("%1$s%2$s%3$s%4$s%5$s", UNDERSCORE, dividend, VERTICAL_BAR, divisor, LINE_END);
 
         return firstString;
     }
 
     private String composeSecondString(int subtrahend, int dividend, int answer) {
         String secondString = "";
-        StringBuilder stringPrepare = new StringBuilder(indent + subtrahend);
+        StringBuilder stringPrepare = new StringBuilder(INDENT + subtrahend);
         int lengthOfSpaces = Integer.toString(dividend).length() - Integer.toString(subtrahend).length();
         int lengthOfDashes = Integer.toString(answer).length();
 
         for (int i = 0; i < lengthOfSpaces; i++) {
-            stringPrepare.append(indent);
+            stringPrepare.append(INDENT);
         }
 
-        stringPrepare.append(verticalBar);
+        stringPrepare.append(VERTICAL_BAR);
 
         for (int i = 0; i < lengthOfDashes; i++) {
-            stringPrepare.append(delimiter);
+            stringPrepare.append(DASH);
         }
 
-        secondString = String.format("%1$s%2$s", stringPrepare.toString(), lineEnd);
+        secondString = String.format("%1$s%2$s", stringPrepare.toString(), LINE_END);
 
         return secondString;
     }
 
     private String composeThirdString(int subtrahend, int dividend, int answer) {
         String thirdString = "";
-        StringBuilder stringPrepare = new StringBuilder(indent);
+        StringBuilder stringPrepare = new StringBuilder(INDENT);
         int lengthOfDashes = Integer.toString(subtrahend).length();
         int lengthOfSpaces = Integer.toString(dividend).length() - Integer.toString(subtrahend).length();
 
         for (int i = 0; i < lengthOfDashes; i++) {
-            stringPrepare.append(delimiter);
+            stringPrepare.append(DASH);
         }
 
         for (int i = 0; i < lengthOfSpaces; i++) {
-            stringPrepare.append(indent);
+            stringPrepare.append(INDENT);
         }
 
-        thirdString = String.format("%1$s%2$s%3$s%4$s", stringPrepare.toString(), verticalBar, answer, lineEnd);
+        thirdString = String.format("%1$s%2$s%3$s%4$s", stringPrepare.toString(), VERTICAL_BAR, answer, LINE_END);
 
         return thirdString;
     }
@@ -113,8 +113,8 @@ public class IntegerDivision {
     private String composeDivisionSteps(ArrayList<String> input, int dividend, int divisor) {
         ArrayList<String> prepareStrings = new ArrayList<>();
         StringBuilder remainingStrings = new StringBuilder("");
-        String indentation = lenghtOfFirstIndent(input) + indent;
-        String minusSignWithIndent = lenghtOfFirstIndent(input) + minusSign;
+        String indentation = lenghtOfFirstIndent(input) + INDENT;
+        String minusSignWithIndent = lenghtOfFirstIndent(input) + UNDERSCORE;
 
         input.remove(0);
         input.remove(0);
@@ -132,14 +132,14 @@ public class IntegerDivision {
                 prepareStrings.add(minusSignWithIndent + input.get(i + iterator));
                 prepareStrings.add(indentation + input.get(i + iterator));
                 prepareStrings.addAll(delimeterWithIndentation(indentation, input.get(i).length()));
-                indentation += indent;
-                minusSignWithIndent = indent + minusSignWithIndent;
+                indentation += INDENT;
+                minusSignWithIndent = INDENT + minusSignWithIndent;
                 iterator++;
             }
 
             String lastString = prepareStrings.get(prepareStrings.size() - 1);
             lastString = lastString.trim();
-            String delimiterWithIndent = delimiter + delimiter;
+            String delimiterWithIndent = DASH + DASH;
             boolean equals = lastString.equals(delimiterWithIndent);
 
             if (!equals) {
@@ -155,7 +155,7 @@ public class IntegerDivision {
             if (i == prepareStringsSize - 1) {
                 remainingStrings.append(prepareStrings.get(i));
             } else {
-                remainingStrings.append(prepareStrings.get(i)).append(lineEnd);
+                remainingStrings.append(prepareStrings.get(i)).append(LINE_END);
             }
         }
 
@@ -168,7 +168,7 @@ public class IntegerDivision {
         int difference = Integer.parseInt(calculatedValues.get(0)) - Integer.parseInt(calculatedValues.get(1));
 
         if (lengthOfFirstNumber > Integer.toString(difference).length() || difference == 0) {
-            indentation = indent;
+            indentation = INDENT;
         } else {
             indentation = "";
         }
@@ -181,7 +181,7 @@ public class IntegerDivision {
         StringBuilder delimiterWithIndent = new StringBuilder(indentation);
 
         for (int i = 0; i < delimeterLenght; i++) {
-            delimiterWithIndent.append(delimiter);
+            delimiterWithIndent.append(DASH);
         }
 
         delimeterWithIndentation.add(delimiterWithIndent.toString());
