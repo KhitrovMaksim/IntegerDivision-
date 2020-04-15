@@ -12,9 +12,9 @@ public class IntegerDivision {
     public String divideInColumn(int dividend, int divisor) {
         dividend = Math.abs(dividend);
         divisor = Math.abs(divisor);
-        ArrayList<String> input = calculateDivisionSteps(dividend, divisor);
+        ArrayList<String> divisionSteps = calculateDivisionSteps(dividend, divisor);
 
-        return composeDivisionResult(input, dividend, divisor);
+        return composeDivisionResult(divisionSteps, dividend, divisor);
     }
 
     private ArrayList<String> calculateDivisionSteps(int dividend, int divisor) {
@@ -49,15 +49,15 @@ public class IntegerDivision {
         return calculatedSteps;
     }
 
-    private String composeDivisionResult(ArrayList<String> input, int dividend, int divisor) {
+    private String composeDivisionResult(ArrayList<String> divisionSteps, int dividend, int divisor) {
 
         int answer = dividend / divisor;
         StringBuilder output = new StringBuilder("");
 
         output.append(composeFirstString(dividend, divisor));
-        output.append(composeSecondString(Integer.parseInt(input.get(1)), dividend, answer));
-        output.append(composeThirdString(Integer.parseInt(input.get(1)), dividend, answer));
-        output.append(composeDivisionSteps(input, dividend, divisor));
+        output.append(composeSecondString(Integer.parseInt(divisionSteps.get(1)), dividend, answer));
+        output.append(composeThirdString(Integer.parseInt(divisionSteps.get(1)), dividend, answer));
+        output.append(composeDivisionSteps(divisionSteps, dividend, divisor));
 
         return output.toString();
     }
@@ -110,16 +110,16 @@ public class IntegerDivision {
         return thirdString;
     }
 
-    private String composeDivisionSteps(ArrayList<String> input, int dividend, int divisor) {
+    private String composeDivisionSteps(ArrayList<String> divisionSteps, int dividend, int divisor) {
         ArrayList<String> prepareStrings = new ArrayList<>();
         StringBuilder remainingStrings = new StringBuilder("");
-        String indentation = lenghtOfFirstIndent(input) + INDENT;
-        String minusSignWithIndent = lenghtOfFirstIndent(input) + UNDERSCORE;
+        String indentation = lenghtOfFirstIndent(divisionSteps) + INDENT;
+        String minusSignWithIndent = lenghtOfFirstIndent(divisionSteps) + UNDERSCORE;
 
-        input.remove(0);
-        input.remove(0);
+        divisionSteps.remove(0);
+        divisionSteps.remove(0);
 
-        int numberOfLines = input.size();
+        int numberOfLines = divisionSteps.size();
         int remainder = dividend % divisor;
         int iterator = 0;
 
@@ -129,9 +129,9 @@ public class IntegerDivision {
         } else {
             for (int i = 0; i < numberOfLines / 2; i++) {
 
-                prepareStrings.add(minusSignWithIndent + input.get(i + iterator));
-                prepareStrings.add(indentation + input.get(i + iterator));
-                prepareStrings.addAll(delimeterWithIndentation(indentation, input.get(i).length()));
+                prepareStrings.add(minusSignWithIndent + divisionSteps.get(i + iterator));
+                prepareStrings.add(indentation + divisionSteps.get(i + iterator));
+                prepareStrings.addAll(delimeterWithIndentation(indentation, divisionSteps.get(i).length()));
                 indentation += INDENT;
                 minusSignWithIndent = INDENT + minusSignWithIndent;
                 iterator++;
