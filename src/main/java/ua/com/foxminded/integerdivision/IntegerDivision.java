@@ -115,8 +115,8 @@ public class IntegerDivision {
         List<String> prepareStrings = new ArrayList<>();
         StringBuilder result = new StringBuilder("");
         String firstIndent = calculatesFirstIndent(divisionSteps);
-        String indentation = firstIndent + INDENT;
-        String minusSignWithIndent = firstIndent + UNDERSCORE;
+        StringBuilder indentation = new StringBuilder(firstIndent + INDENT);
+        StringBuilder minusSignWithIndent = new StringBuilder(firstIndent + UNDERSCORE);
 
         divisionSteps.remove(0);
         divisionSteps.remove(0);
@@ -126,15 +126,15 @@ public class IntegerDivision {
         int iterator = 0;
 
         if (numberOfLines == 0) {
-            indentation = indentation.substring(1);
+            indentation.delete(0, 1);
 
             if (dividend == divisor) {
                 for (int i = 0; i < Integer.toString(divisor).length() - 1; i++) {
-                    indentation += INDENT;
+                    indentation.append(INDENT);
                 }
             }
 
-            prepareStrings.add(indentation + remainder);
+            prepareStrings.add(indentation.toString() + remainder);
 
         } else {
 
@@ -143,17 +143,16 @@ public class IntegerDivision {
                 prepareStrings.add(minusSignWithIndent + divisionSteps.get(i + iterator));
                 iterator++;
                 prepareStrings.add(indentation + divisionSteps.get(i + iterator));
-                prepareStrings.addAll(delimeterWithIndentation(indentation, divisionSteps.get(i).length()));
-                indentation += INDENT;
-                minusSignWithIndent = INDENT + minusSignWithIndent;
+                prepareStrings.addAll(delimeterWithIndentation(indentation.toString(), divisionSteps.get(i).length()));
+                indentation.append(INDENT);
+                minusSignWithIndent.insert(0, INDENT);
 
             }
 
             String lastString = prepareStrings.get(prepareStrings.size() - 1);
             int lastStringLength = lastString.length();
             int remainderLength = Integer.toString(remainder).length();
-            indentation = calculatesIndentation(lastStringLength - remainderLength);
-            prepareStrings.add(indentation + remainder);
+            prepareStrings.add(calculatesIndentation(lastStringLength - remainderLength) + remainder);
 
         }
 
