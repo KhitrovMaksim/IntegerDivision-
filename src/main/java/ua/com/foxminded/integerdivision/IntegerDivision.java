@@ -114,8 +114,8 @@ public class IntegerDivision {
     private String composeDivisionSteps(List<String> divisionSteps, int dividend, int divisor) {
         List<String> prepareStrings = new ArrayList<>();
         StringBuilder result = new StringBuilder("");
-        String indentation = lengthOfFirstIndent(divisionSteps) + INDENT;
-        String minusSignWithIndent = lengthOfFirstIndent(divisionSteps) + UNDERSCORE;
+        String indentation = calculatesFirstIndent(divisionSteps) + INDENT;
+        String minusSignWithIndent = calculatesFirstIndent(divisionSteps) + UNDERSCORE;
 
         divisionSteps.remove(0);
         divisionSteps.remove(0);
@@ -151,7 +151,7 @@ public class IntegerDivision {
             String lastString = prepareStrings.get(prepareStrings.size() - 1);
             int lastStringLength = lastString.length();
             int remainderLength = Integer.toString(remainder).length();
-            indentation = indentation(lastStringLength - remainderLength);
+            indentation = calculatesIndentation(lastStringLength - remainderLength);
             prepareStrings.add(indentation + remainder);
 
         }
@@ -168,16 +168,16 @@ public class IntegerDivision {
         return result.toString();
     }
 
-    private String indentation(int indentationLength) {
+    private String calculatesIndentation(int requiredLength) {
         StringBuilder indentation = new StringBuilder("");
-        for (int i = 0; i < indentationLength; i++) {
+        for (int i = 0; i < requiredLength; i++) {
             indentation.append(INDENT);
         }
 
         return indentation.toString();
     }
 
-    private String lengthOfFirstIndent(List<String> calculatedValues) {
+    private String calculatesFirstIndent(List<String> calculatedValues) {
         String indentation = "";
         int lengthOfFirstNumber = calculatedValues.get(0).length();
         int difference = Integer.parseInt(calculatedValues.get(0)) - Integer.parseInt(calculatedValues.get(1));
