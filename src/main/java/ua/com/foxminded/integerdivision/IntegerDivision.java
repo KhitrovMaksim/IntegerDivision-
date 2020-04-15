@@ -1,6 +1,7 @@
 package ua.com.foxminded.integerdivision;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class IntegerDivision {
     private static String UNDERSCORE = "_";
@@ -12,18 +13,18 @@ public class IntegerDivision {
     public String divideInColumn(int dividend, int divisor) {
         dividend = Math.abs(dividend);
         divisor = Math.abs(divisor);
-        ArrayList<String> divisionSteps = calculateDivisionSteps(dividend, divisor);
+        List<String> divisionSteps = calculateDivisionSteps(dividend, divisor);
 
         return composeDivisionResult(divisionSteps, dividend, divisor);
     }
 
-    private ArrayList<String> calculateDivisionSteps(int dividend, int divisor) {
+    private List<String> calculateDivisionSteps(int dividend, int divisor) {
 
         if ((divisor == 0) || (divisor > dividend)) {
             throw new IllegalArgumentException("Divisor cannot be 0 or bigger than dividend.");
         }
 
-        ArrayList<String> calculatedSteps = new ArrayList<>();
+        List<String> calculatedSteps = new ArrayList<>();
         char[] digitsDividend = Integer.toString(dividend).toCharArray();
         int amountNumbersToDivide = digitsDividend.length - 1;
         int number = Character.getNumericValue(digitsDividend[0]);
@@ -49,7 +50,7 @@ public class IntegerDivision {
         return calculatedSteps;
     }
 
-    private String composeDivisionResult(ArrayList<String> divisionSteps, int dividend, int divisor) {
+    private String composeDivisionResult(List<String> divisionSteps, int dividend, int divisor) {
 
         int answer = dividend / divisor;
         StringBuilder output = new StringBuilder("");
@@ -101,8 +102,8 @@ public class IntegerDivision {
         return String.format("%1$s%2$s%3$s%4$s", stringPrepare.toString(), VERTICAL_BAR, answer, LINE_END);
     }
 
-    private String composeDivisionSteps(ArrayList<String> divisionSteps, int dividend, int divisor) {
-        ArrayList<String> prepareStrings = new ArrayList<>();
+    private String composeDivisionSteps(List<String> divisionSteps, int dividend, int divisor) {
+        List<String> prepareStrings = new ArrayList<>();
         StringBuilder remainingStrings = new StringBuilder("");
         String indentation = lenghtOfFirstIndent(divisionSteps) + INDENT;
         String minusSignWithIndent = lenghtOfFirstIndent(divisionSteps) + UNDERSCORE;
@@ -153,7 +154,7 @@ public class IntegerDivision {
         return remainingStrings.toString();
     }
 
-    private String lenghtOfFirstIndent(ArrayList<String> calculatedValues) {
+    private String lenghtOfFirstIndent(List<String> calculatedValues) {
         String indentation = "";
         int lengthOfFirstNumber = calculatedValues.get(0).length();
         int difference = Integer.parseInt(calculatedValues.get(0)) - Integer.parseInt(calculatedValues.get(1));
@@ -165,8 +166,8 @@ public class IntegerDivision {
         return indentation;
     }
 
-    private ArrayList<String> delimeterWithIndentation(String indentation, int delimeterLenght) {
-        ArrayList<String> delimeterWithIndentation = new ArrayList<>();
+    private List<String> delimeterWithIndentation(String indentation, int delimeterLenght) {
+        List<String> delimeterWithIndentation = new ArrayList<>();
         StringBuilder delimiterWithIndent = new StringBuilder(indentation);
 
         for (int i = 0; i < delimeterLenght; i++) {
