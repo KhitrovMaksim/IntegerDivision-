@@ -149,9 +149,9 @@ public class IntegerDivision {
             }
 
             String lastString = prepareStrings.get(prepareStrings.size() - 1);
-            int lastStringLenght = lastString.length();
-            int remainderLenght = Integer.toString(remainder).length();
-            indentation = indentation(lastStringLenght - remainderLenght);
+            int lastStringLength = lastString.length();
+            int remainderLength = Integer.toString(remainder).length();
+            indentation = indentation(lastStringLength - remainderLength);
             prepareStrings.add(indentation + remainder);
 
         }
@@ -189,11 +189,11 @@ public class IntegerDivision {
         return indentation;
     }
 
-    private List<String> delimeterWithIndentation(String indentation, int delimeterLenght) {
+    private List<String> delimeterWithIndentation(String indentation, int delimeterLength) {
         List<String> delimeterWithIndentation = new ArrayList<>();
         StringBuilder delimiterWithIndent = new StringBuilder(indentation);
 
-        for (int i = 0; i < delimeterLenght; i++) {
+        for (int i = 0; i < delimeterLength; i++) {
             delimiterWithIndent.append(DASH);
         }
 
