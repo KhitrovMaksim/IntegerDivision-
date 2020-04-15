@@ -156,10 +156,8 @@ public class IntegerDivision {
 
         }
 
-        int prepareStringsSize = prepareStrings.size();
-
-        for (int i = 0; i < prepareStringsSize; i++) {
-            if (i == prepareStringsSize - 1) {
+        for (int i = 0; i < prepareStrings.size(); i++) {
+            if (i == prepareStrings.size() - 1) {
                 result.append(prepareStrings.get(i));
             } else {
                 result.append(prepareStrings.get(i)).append(LINE_END);
