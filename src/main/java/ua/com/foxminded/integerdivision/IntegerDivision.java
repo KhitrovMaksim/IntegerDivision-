@@ -154,14 +154,12 @@ public class IntegerDivision {
     }
 
     private String lenghtOfFirstIndent(ArrayList<String> calculatedValues) {
-        String indentation;
+        String indentation = "";
         int lengthOfFirstNumber = calculatedValues.get(0).length();
         int difference = Integer.parseInt(calculatedValues.get(0)) - Integer.parseInt(calculatedValues.get(1));
 
         if (lengthOfFirstNumber > Integer.toString(difference).length() || difference == 0) {
             indentation = INDENT;
-        } else {
-            indentation = "";
         }
 
         return indentation;
