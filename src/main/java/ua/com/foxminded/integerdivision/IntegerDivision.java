@@ -63,11 +63,8 @@ public class IntegerDivision {
     }
 
     private String composeFirstString(int dividend, int divisor) {
-        String firstString = "";
 
-        firstString = String.format("%1$s%2$s%3$s%4$s%5$s", UNDERSCORE, dividend, VERTICAL_BAR, divisor, LINE_END);
-
-        return firstString;
+        return String.format("%1$s%2$s%3$s%4$s%5$s", UNDERSCORE, dividend, VERTICAL_BAR, divisor, LINE_END);
     }
 
     private String composeSecondString(int subtrahend, int dividend, int answer) {
