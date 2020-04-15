@@ -68,7 +68,6 @@ public class IntegerDivision {
     }
 
     private String composeSecondString(int subtrahend, int dividend, int answer) {
-        String secondString = "";
         StringBuilder stringPrepare = new StringBuilder(INDENT + subtrahend);
         int lengthOfSpaces = Integer.toString(dividend).length() - Integer.toString(subtrahend).length();
         int lengthOfDashes = Integer.toString(answer).length();
@@ -83,9 +82,7 @@ public class IntegerDivision {
             stringPrepare.append(DASH);
         }
 
-        secondString = String.format("%1$s%2$s", stringPrepare.toString(), LINE_END);
-
-        return secondString;
+        return String.format("%1$s%2$s", stringPrepare.toString(), LINE_END);
     }
 
     private String composeThirdString(int subtrahend, int dividend, int answer) {
