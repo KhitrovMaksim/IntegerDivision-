@@ -10,6 +10,7 @@
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.surefire.plugin>2.22.1</maven.surefire.plugin>
         <junit.jupiter.version>5.4.0</junit.jupiter.version>
     </properties>
 
@@ -32,7 +33,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.1</version>
+                <version>${maven.surefire.plugin}</version>
             </plugin>
         </plugins>
     </build>
