@@ -23,7 +23,7 @@ public class IntegerDivision {
         if (divisor == 0) {
             throw new IllegalArgumentException("Divisor cannot be 0.");
         }
-        
+
         List<String> calculatedSteps = new ArrayList<>();
         char[] digitsDividend = Integer.toString(dividend).toCharArray();
         int amountNumbersToDivide = digitsDividend.length - 1;
@@ -34,7 +34,7 @@ public class IntegerDivision {
 
         do {
 
-            if (dividend == divisor) {
+            if (dividend == divisor || dividend == 0) {
                 calculatedSteps.add(Integer.toString(dividend));
                 calculatedSteps.add(Integer.toString(divisor));
                 break;
@@ -57,7 +57,7 @@ public class IntegerDivision {
     }
 
     private String composeDivisionResult(List<String> divisionSteps, int dividend, int divisor) {
-        
+
         int answer = dividend / divisor;
         int lengthOfSpaces = Integer.toString(dividend).length();
         String firstIndent = calculatesFirstIndent(divisionSteps);
@@ -65,10 +65,11 @@ public class IntegerDivision {
 
         result.append(composeFirstString(dividend, divisor));
         result.append(composeSecondString(Integer.parseInt(divisionSteps.get(1)), dividend, divisor, answer));
-        
+
         if (divisor <= dividend) {
             result.append(composeThirdString(Integer.parseInt(divisionSteps.get(1)), dividend, answer));
-            result.append(composeDivisionSteps(divisionSteps.subList(2, divisionSteps.size()), dividend, divisor, firstIndent));
+            result.append(composeDivisionSteps(divisionSteps.subList(2, divisionSteps.size()), dividend, divisor,
+                    firstIndent));
         } else {
             result.append(String.format("%1$s%2$s%3$s", calculatesIndentation(lengthOfSpaces), VERTICAL_BAR, answer));
         }
@@ -77,7 +78,7 @@ public class IntegerDivision {
     }
 
     private String composeFirstString(int dividend, int divisor) {
-        
+
         if (divisor > dividend) {
             return String.format("%1$s%2$s%3$s%4$s", dividend, VERTICAL_BAR, divisor, LINE_END);
         }
@@ -87,7 +88,7 @@ public class IntegerDivision {
 
     private String composeSecondString(int subtrahend, int dividend, int divisor, int answer) {
         StringBuilder stringPrepare = new StringBuilder("");
-        
+
         if (divisor > dividend) {
             stringPrepare.append(INDENT);
         } else {
@@ -115,7 +116,7 @@ public class IntegerDivision {
 
     private String composeThirdString(int subtrahend, int dividend, int answer) {
         StringBuilder stringPrepare = new StringBuilder(INDENT);
-        
+
         int lengthOfDashes = Integer.toString(subtrahend).length();
         int lengthOfSpaces = Integer.toString(dividend).length() - Integer.toString(subtrahend).length();
 
@@ -141,7 +142,7 @@ public class IntegerDivision {
 
         indentation.append(firstIndent).append(INDENT);
         minusSignWithIndent.append(firstIndent).append(UNDERSCORE);
-        
+
         if (numberOfLines == 0) {
             indentation.delete(0, 1);
 

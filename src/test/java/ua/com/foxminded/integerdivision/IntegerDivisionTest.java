@@ -18,6 +18,16 @@ class IntegerDivisionTest {
     }
     
     @Test
+    void integerDivision_ShouldReturnCertainString_IfDividendIsZero() {
+        String expected =
+                "0|100\n" +
+                " |---\n" +
+                " |0";
+
+        assertEquals(expected, integerDivision.divideInColumn(0, 100));
+    }
+    
+    @Test
     void integerDivision_ShouldReturnCertainString_IfDivisorIsOne() {
         String expected =
                 "_999|1\n" +
