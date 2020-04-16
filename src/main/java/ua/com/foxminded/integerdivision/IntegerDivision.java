@@ -133,13 +133,15 @@ public class IntegerDivision {
     private String composeDivisionSteps(List<String> divisionSteps, int dividend, int divisor, String firstIndent) {
         List<String> prepareStrings = new ArrayList<>();
         StringBuilder result = new StringBuilder("");
-        StringBuilder indentation = new StringBuilder(firstIndent + INDENT);
-        StringBuilder minusSignWithIndent = new StringBuilder(firstIndent + UNDERSCORE);
-
+        StringBuilder indentation = new StringBuilder("");
+        StringBuilder minusSignWithIndent = new StringBuilder("");
         int numberOfLines = divisionSteps.size();
         int remainder = dividend % divisor;
         int iterator = 0;
 
+        indentation.append(firstIndent).append(INDENT);
+        minusSignWithIndent.append(firstIndent).append(UNDERSCORE);
+        
         if (numberOfLines == 0) {
             indentation.delete(0, 1);
 
