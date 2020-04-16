@@ -60,6 +60,7 @@ public class IntegerDivision {
         
         int answer = dividend / divisor;
         int lengthOfSpaces = Integer.toString(dividend).length();
+        String firstIndent = calculatesFirstIndent(divisionSteps);
         StringBuilder output = new StringBuilder("");
 
         output.append(composeFirstString(dividend, divisor));
@@ -67,7 +68,7 @@ public class IntegerDivision {
         
         if (divisor <= dividend) {
             output.append(composeThirdString(Integer.parseInt(divisionSteps.get(1)), dividend, answer));
-            output.append(composeDivisionSteps(divisionSteps, dividend, divisor));
+            output.append(composeDivisionSteps(divisionSteps.subList(2, divisionSteps.size()), dividend, divisor, firstIndent));
         } else {
             output.append(String.format("%1$s%2$s%3$s", calculatesIndentation(lengthOfSpaces), VERTICAL_BAR, answer));
         }
@@ -129,15 +130,11 @@ public class IntegerDivision {
         return String.format("%1$s%2$s%3$s%4$s", stringPrepare.toString(), VERTICAL_BAR, answer, LINE_END);
     }
 
-    private String composeDivisionSteps(List<String> divisionSteps, int dividend, int divisor) {
+    private String composeDivisionSteps(List<String> divisionSteps, int dividend, int divisor, String firstIndent) {
         List<String> prepareStrings = new ArrayList<>();
         StringBuilder result = new StringBuilder("");
-        String firstIndent = calculatesFirstIndent(divisionSteps);
         StringBuilder indentation = new StringBuilder(firstIndent + INDENT);
         StringBuilder minusSignWithIndent = new StringBuilder(firstIndent + UNDERSCORE);
-
-        divisionSteps.remove(0);
-        divisionSteps.remove(0);
 
         int numberOfLines = divisionSteps.size();
         int remainder = dividend % divisor;
