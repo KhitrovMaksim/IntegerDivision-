@@ -161,7 +161,7 @@ public class IntegerDivision {
                 prepareStrings.add(minusSignWithIndent + divisionSteps.get(i + iterator));
                 iterator++;
                 prepareStrings.add(indentation + divisionSteps.get(i + iterator));
-                prepareStrings.addAll(delimeterWithIndentation(indentation.toString(), divisionSteps.get(i).length()));
+                prepareStrings.add(delimeterWithIndentation(indentation.toString(), divisionSteps.get(i).length()));
                 indentation.append(INDENT);
                 minusSignWithIndent.insert(0, INDENT);
 
@@ -205,16 +205,13 @@ public class IntegerDivision {
         return indentation;
     }
 
-    private List<String> delimeterWithIndentation(String indentation, int delimeterLength) {
-        List<String> delimeterWithIndentation = new ArrayList<>();
+    private String delimeterWithIndentation(String indentation, int delimeterLength) {
         StringBuilder delimiterWithIndent = new StringBuilder(indentation);
 
         for (int i = 0; i < delimeterLength; i++) {
             delimiterWithIndent.append(DASH);
         }
 
-        delimeterWithIndentation.add(delimiterWithIndent.toString());
-
-        return delimeterWithIndentation;
+        return delimiterWithIndent.toString();
     }
 }
