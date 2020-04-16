@@ -18,22 +18,6 @@ class IntegerDivisionTest {
     }
     
     @Test
-    void integerDivision_ThrowsException_IfDividendIsZero() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            integerDivision.divideInColumn(0, 1);
-        });
-    }
-    
-    @Test
-    void integerDivision_ThrowsException_IfDivisorBiggerThanDividend() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            integerDivision.divideInColumn(1, 8);
-        });
-    }
-    
-    @Test
     void integerDivision_ShouldReturnCertainString_IfDivisorIsOne() {
         String expected =
                 "_999|1\n" +
@@ -124,5 +108,15 @@ class IntegerDivisionTest {
                 "    32";
 
         assertEquals(expected, integerDivision.divideInColumn(-75451, 53));
+    }
+    
+    @Test
+    void integerDivision_ShouldReturnCertainString_IfDivisorGreaterThenDividend() {
+        String expected =
+                "253|6579\n" +
+                "   |----\n" +
+                "   |0";
+
+        assertEquals(expected, integerDivision.divideInColumn(253, 6579));
     }
 }
