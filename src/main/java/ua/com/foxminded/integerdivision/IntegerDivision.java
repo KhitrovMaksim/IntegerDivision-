@@ -61,19 +61,19 @@ public class IntegerDivision {
         int answer = dividend / divisor;
         int lengthOfSpaces = Integer.toString(dividend).length();
         String firstIndent = calculatesFirstIndent(divisionSteps);
-        StringBuilder output = new StringBuilder("");
+        StringBuilder result = new StringBuilder("");
 
-        output.append(composeFirstString(dividend, divisor));
-        output.append(composeSecondString(Integer.parseInt(divisionSteps.get(1)), dividend, divisor, answer));
+        result.append(composeFirstString(dividend, divisor));
+        result.append(composeSecondString(Integer.parseInt(divisionSteps.get(1)), dividend, divisor, answer));
         
         if (divisor <= dividend) {
-            output.append(composeThirdString(Integer.parseInt(divisionSteps.get(1)), dividend, answer));
-            output.append(composeDivisionSteps(divisionSteps.subList(2, divisionSteps.size()), dividend, divisor, firstIndent));
+            result.append(composeThirdString(Integer.parseInt(divisionSteps.get(1)), dividend, answer));
+            result.append(composeDivisionSteps(divisionSteps.subList(2, divisionSteps.size()), dividend, divisor, firstIndent));
         } else {
-            output.append(String.format("%1$s%2$s%3$s", calculatesIndentation(lengthOfSpaces), VERTICAL_BAR, answer));
+            result.append(String.format("%1$s%2$s%3$s", calculatesIndentation(lengthOfSpaces), VERTICAL_BAR, answer));
         }
 
-        return output.toString();
+        return result.toString();
     }
 
     private String composeFirstString(int dividend, int divisor) {
