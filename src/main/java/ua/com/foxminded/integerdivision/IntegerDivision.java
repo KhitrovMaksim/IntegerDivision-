@@ -78,14 +78,9 @@ public class IntegerDivision {
     }
 
     private String composeFirstString(int dividend, int divisor) {
-        String firstString = "";
-
-        if (divisor > dividend) {
-            firstString = String.format("%1$s%2$s%3$s%4$s", dividend, VERTICAL_BAR, divisor, LINE_END);
-        } else {
-            firstString = String.format("%1$s%2$s%3$s%4$s%5$s", UNDERSCORE, dividend, VERTICAL_BAR, divisor, LINE_END);
-        }
-        
+        String firstString = divisor > dividend
+                ? String.format("%1$s%2$s%3$s%4$s", dividend, VERTICAL_BAR, divisor, LINE_END)
+                : String.format("%1$s%2$s%3$s%4$s%5$s", UNDERSCORE, dividend, VERTICAL_BAR, divisor, LINE_END);
         return firstString;
     }
 
