@@ -60,7 +60,7 @@ public class IntegerDivision {
 
         int answer = dividend / divisor;
         int lengthOfSpaces = Integer.toString(dividend).length();
-        String firstIndent = calculatesFirstIndent(divisionSteps);
+        String firstIndent = calculateFirstIndent(divisionSteps);
         StringBuilder result = new StringBuilder("");
 
         result.append(composeFirstString(dividend, divisor));
@@ -71,19 +71,22 @@ public class IntegerDivision {
             result.append(composeDivisionSteps(divisionSteps.subList(2, divisionSteps.size()), dividend, divisor,
                     firstIndent));
         } else {
-            result.append(String.format("%1$s%2$s%3$s", calculatesIndentation(lengthOfSpaces), VERTICAL_BAR, answer));
+            result.append(String.format("%1$s%2$s%3$s", calculateIndentation(lengthOfSpaces), VERTICAL_BAR, answer));
         }
 
         return result.toString();
     }
 
     private String composeFirstString(int dividend, int divisor) {
+        String firstString = "";
 
         if (divisor > dividend) {
-            return String.format("%1$s%2$s%3$s%4$s", dividend, VERTICAL_BAR, divisor, LINE_END);
+            firstString = String.format("%1$s%2$s%3$s%4$s", dividend, VERTICAL_BAR, divisor, LINE_END);
+        } else {
+            firstString = String.format("%1$s%2$s%3$s%4$s%5$s", UNDERSCORE, dividend, VERTICAL_BAR, divisor, LINE_END);
         }
-
-        return String.format("%1$s%2$s%3$s%4$s%5$s", UNDERSCORE, dividend, VERTICAL_BAR, divisor, LINE_END);
+        
+        return firstString;
     }
 
     private String composeSecondString(int subtrahend, int dividend, int divisor, int answer) {
@@ -170,7 +173,7 @@ public class IntegerDivision {
             String lastString = prepareStrings.get(prepareStrings.size() - 1);
             int lastStringLength = lastString.length();
             int remainderLength = Integer.toString(remainder).length();
-            prepareStrings.add(calculatesIndentation(lastStringLength - remainderLength) + remainder);
+            prepareStrings.add(calculateIndentation(lastStringLength - remainderLength) + remainder);
 
         }
 
@@ -184,7 +187,7 @@ public class IntegerDivision {
         return result.toString();
     }
 
-    private String calculatesIndentation(int requiredLength) {
+    private String calculateIndentation(int requiredLength) {
         StringBuilder indentation = new StringBuilder("");
         for (int i = 0; i < requiredLength; i++) {
             indentation.append(INDENT);
@@ -193,7 +196,7 @@ public class IntegerDivision {
         return indentation.toString();
     }
 
-    private String calculatesFirstIndent(List<String> calculatedValues) {
+    private String calculateFirstIndent(List<String> calculatedValues) {
         String indentation = "";
         int lengthOfFirstNumber = calculatedValues.get(0).length();
         int difference = Integer.parseInt(calculatedValues.get(0)) - Integer.parseInt(calculatedValues.get(1));
